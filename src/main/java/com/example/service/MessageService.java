@@ -18,6 +18,7 @@ public class MessageService {
         this.messageRepo = messageRepository;
     }   
 
+    //#4 In progress
     public List<Message> getAllMessages() {
         return (List<Message>) messageRepo.findAll();
     }

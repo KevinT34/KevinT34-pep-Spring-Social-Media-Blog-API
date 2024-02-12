@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.entity.Account;
 import com.example.entity.Message;
 import com.example.service.AccountService;
 import com.example.service.MessageService;
@@ -29,12 +30,19 @@ public class SocialMediaController {
         this.messageService = msgService;
     }
 
+    //#1 In Progress
+    @PostMapping("register")
+    public ResponseEntity<Account> postNewAccountHandler(@RequestBody Account newAcc) {
+        //Call account service for business logic
+        accountService.registerNewAccount(newAcc);
+    }
 
-    //In progress
+
+    //#4 In progress
     @GetMapping("messages")
     public ResponseEntity<List<Message>> getAllMessagesHandler() {
         
-        return ResponseEntity.status(HttpStatus.OK)
+        return ResponseEntity.status(200)
                         .body(messageService.getAllMessages());
     }
 
