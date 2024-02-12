@@ -35,6 +35,7 @@ public class SocialMediaController {
     public ResponseEntity<Account> postNewAccountHandler(@RequestBody Account newAcc) {
         //Call account service for business logic
         accountService.registerNewAccount(newAcc);
+        return null;
     }
 
 
