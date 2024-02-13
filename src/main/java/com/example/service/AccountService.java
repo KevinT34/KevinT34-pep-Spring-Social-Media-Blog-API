@@ -2,6 +2,8 @@ package com.example.service;
 
 import java.util.List;
 
+import javax.naming.AuthenticationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class AccountService {
     public Account registerNewAccount(Account newAccount) {
         
         if(accountRepo.findByUsername(newAccount.getUsername()) != null) {
-            //return 409 - throw error?
+            //return 409 - throw error resource already exists exception?
         }
 
         if (!newAccount.getUsername().isBlank() && newAccount.getPassword().length() >= 4) {
@@ -32,16 +34,17 @@ public class AccountService {
 
         }
 
-        //return client side error
+        //return client side error (maybe pass a null for client side error)
         
 
         return null;
     }
 
     //#2 In Progress
-    public Account postLogin(Account loginAccount) {
+    public Account postLogin(Account loginAccount) throws AuthenticationException{
         
         return null;
+        //throw new AuthenticationException("Check username and passwords as they are invalid");
     }
 
     //#3 In Progress

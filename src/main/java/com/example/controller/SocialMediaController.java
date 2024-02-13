@@ -37,6 +37,7 @@ public class SocialMediaController {
     public ResponseEntity<Account> postNewAccountHandler(@RequestBody Account newAcc) {
         //Call account service for business logic
         Account addedAccount = accountService.registerNewAccount(newAcc);
+        //try catch?
 
         return ResponseEntity.status(200).body(addedAccount);
     }
@@ -45,7 +46,7 @@ public class SocialMediaController {
     //#2 In Progress
     @PostMapping("login")
     public ResponseEntity<Account> postLogin(@RequestBody Account loginAcc) {
-        accountService.postLogin(loginAcc);
+        //accountService.postLogin(loginAcc);
         return null;
     }
 
