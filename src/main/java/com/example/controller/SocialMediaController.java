@@ -42,6 +42,14 @@ public class SocialMediaController {
     }
 
 
+    //#2 In Progress
+    @PostMapping("login")
+    public ResponseEntity<Account> postLogin(@RequestBody Account loginAcc) {
+        accountService.postLogin(loginAcc);
+        return null;
+    }
+
+
     //#3 In Progress
     @PostMapping("messages")
     public ResponseEntity<Message> postNewMessage(@RequestBody Message newMessage) {

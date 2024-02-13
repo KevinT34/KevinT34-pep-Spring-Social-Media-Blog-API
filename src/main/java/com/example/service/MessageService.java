@@ -20,7 +20,7 @@ public class MessageService {
         this.messageRepo = messageRepository;
     }   
 
-    //#3
+    //#3 IN PROGRESS
     public Message postNewMessage(Message newMsg) {
         if (!newMsg.getMessage_text().isBlank() &&
             newMsg.getMessage_text().length() <= 255 &&
@@ -55,7 +55,7 @@ public class MessageService {
         return false;
     }
 
-    //#7 IN PROGRESS
+    //#7 Complete
     public boolean updateMessageById(int message_id, Message newMsg) {
         //check if message id exists & new message text is not blank or over 255
         if (messageRepo.findById(message_id).isPresent() &&

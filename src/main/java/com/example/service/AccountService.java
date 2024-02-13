@@ -38,6 +38,13 @@ public class AccountService {
         return null;
     }
 
+    //#2 In Progress
+    public Account postLogin(Account loginAccount) {
+        
+        return null;
+    }
+
+    //#3 In Progress
     public Account findByAccountId(int account_id) {
         Account foundAccount = accountRepo.findById(account_id).get();
         return foundAccount;
