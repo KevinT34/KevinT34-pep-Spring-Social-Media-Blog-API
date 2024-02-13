@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.entity.Account;
 import com.example.entity.Message;
+import com.example.exception.DuplicateResourceException;
 import com.example.repository.AccountRepository;
 
 @Service
@@ -24,7 +25,7 @@ public class AccountService {
     public Account registerNewAccount(Account newAccount) {
         
         if(accountRepo.findByUsername(newAccount.getUsername()) != null) {
-            //return 409 - throw error resource already exists exception?
+            throw new DuplicateResourceException("Account with this username already exists.");
         }
 
         if (!newAccount.getUsername().isBlank() && newAccount.getPassword().length() >= 4) {
@@ -35,8 +36,6 @@ public class AccountService {
         }
 
         //return client side error (maybe pass a null for client side error)
-        
-
         return null;
     }
 

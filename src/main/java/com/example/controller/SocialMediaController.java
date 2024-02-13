@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.entity.Account;
 import com.example.entity.Message;
+import com.example.exception.DuplicateResourceException;
 import com.example.service.AccountService;
 import com.example.service.MessageService;
 
@@ -38,10 +39,19 @@ public class SocialMediaController {
     @PostMapping("register")
     public ResponseEntity<Account> postNewAccountHandler(@RequestBody Account newAcc) {
         //Call account service for business logic
-        Account addedAccount = accountService.registerNewAccount(newAcc);
         //try catch?
+        try {
+            Account addedAccount = accountService.registerNewAccount(newAcc);
+            if (addedAccount != null) {
+                return ResponseEntity.status(200).body(addedAccount);
+            } else {
+                return ResponseEntity.status(400).build();
+            }
+        } catch (DuplicateResourceException ex) {
+            return ResponseEntity.status(409).build();
+        }
 
-        return ResponseEntity.status(200).body(addedAccount);
+         
     }
 
 
