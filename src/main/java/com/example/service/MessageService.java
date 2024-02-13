@@ -7,22 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Message;
+import com.example.exception.ResourceNotFoundException;
 import com.example.repository.MessageRepository;
 
 @Service
 public class MessageService {
 
     private MessageRepository messageRepo;
-    private AccountService accountService;
+    
 
     @Autowired
     public MessageService(MessageRepository messageRepository){
         this.messageRepo = messageRepository;
     }   
 
-    //#3 IN PROGRESS
+    //#3 Complete
     public Message postNewMessage(Message newMsg) {
-        //accountService.findByAccountId(newMsg.getPosted_by()) != null
         
         if (!newMsg.getMessage_text().isBlank() &&
             newMsg.getMessage_text().length() <= 255) {
@@ -72,9 +72,9 @@ public class MessageService {
     }
 
 
-    //#8 IN PROGRESS
+    //#8 Complete
     public List<Message> getMessagesByAccountId(int account_id) {
-        //return messageRepo.findMessagesByPostedBy(account_id);
-        return null;
+        return messageRepo.findMessagesByPostedBy(account_id);
+        
     }
 }

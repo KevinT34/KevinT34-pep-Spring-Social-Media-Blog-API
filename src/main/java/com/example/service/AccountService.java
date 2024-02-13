@@ -49,13 +49,18 @@ public class AccountService {
         
     }
 
-    //#3 In Progress
+    //#3 Complete
     public Account findByAccountId(int account_id) {
         
         if (accountRepo.findById(account_id).isPresent()) {
             return accountRepo.findById(account_id).get();
         }
         return null;
+    }
+
+    public boolean checkAccountExistById(int account_id) {
+        return accountRepo.existsById(account_id);
+        
     }
 
 

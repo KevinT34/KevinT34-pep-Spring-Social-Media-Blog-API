@@ -12,6 +12,7 @@ import com.example.entity.Message;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Integer>{
     
-    // //#8 IN PROGRESS
-    //List<Message> findMessagesByPostedBy(int account_id);
+    // //#8 complete
+    @Query("Select m from Message m where m.posted_by = :account_id")
+    List<Message> findMessagesByPostedBy(@Param("account_id") int account_id);
 }

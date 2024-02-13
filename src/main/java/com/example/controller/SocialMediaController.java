@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.entity.Account;
 import com.example.entity.Message;
 import com.example.exception.DuplicateResourceException;
+import com.example.exception.ResourceNotFoundException;
 import com.example.service.AccountService;
 import com.example.service.MessageService;
 
@@ -68,16 +69,20 @@ public class SocialMediaController {
     }
 
 
-    //#3 In Progress
+    //#3 Complete
     @PostMapping("messages")
     public ResponseEntity<Message> postNewMessage(@RequestBody Message newMessage) {
-        Message addedMessage = messageService.postNewMessage(newMessage);
-        if ( addedMessage != null) {
-            return ResponseEntity.status(200).body(addedMessage);
+        
+        if (accountService.checkAccountExistById(newMessage.getPosted_by())) {
+            Message addedMessage = messageService.postNewMessage(newMessage);
+            if ( addedMessage != null) {
+                return ResponseEntity.status(200).body(addedMessage);
+            } 
         }
+            
         return ResponseEntity.status(400).build();
+     
     }
-
 
 
     //#4 Complete
@@ -121,7 +126,7 @@ public class SocialMediaController {
     }
 
 
-    //#8 IN PROGRESS
+    //#8 Complete
     @GetMapping("/accounts/{account_id}/messages")
     public ResponseEntity<List<Message>> getMessagesByAccountId(@PathVariable int account_id) {
         List<Message> foundMessages = messageService.getMessagesByAccountId(account_id);
