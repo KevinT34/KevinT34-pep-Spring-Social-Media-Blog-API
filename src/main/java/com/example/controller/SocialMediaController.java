@@ -36,9 +36,22 @@ public class SocialMediaController {
     @PostMapping("register")
     public ResponseEntity<Account> postNewAccountHandler(@RequestBody Account newAcc) {
         //Call account service for business logic
-        accountService.registerNewAccount(newAcc);
-        return null;
+        Account addedAccount = accountService.registerNewAccount(newAcc);
+
+        return ResponseEntity.status(200).body(addedAccount);
     }
+
+
+    //#3 In Progress
+    @PostMapping("messages")
+    public ResponseEntity<Message> postNewMessage(@RequestBody Message newMessage) {
+        Message addedMessage = messageService.postNewMessage(newMessage);
+        if ( addedMessage != null) {
+            return ResponseEntity.status(200).body(addedMessage);
+        }
+        return ResponseEntity.status(400).build();
+    }
+
 
 
     //#4 Complete
@@ -71,7 +84,7 @@ public class SocialMediaController {
     }
 
 
-    //#7 IN PROGRESS
+    //#7 Complete
     @PatchMapping("/messages/{message_id}")
     public ResponseEntity<Integer> patchMessageById(@PathVariable int message_id, @RequestBody Message updatedMessage) {
         boolean updateFlag = messageService.updateMessageById(message_id, updatedMessage);

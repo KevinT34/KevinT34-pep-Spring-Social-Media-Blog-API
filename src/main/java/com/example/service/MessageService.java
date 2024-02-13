@@ -13,11 +13,23 @@ import com.example.repository.MessageRepository;
 public class MessageService {
 
     private MessageRepository messageRepo;
+    private AccountService accountService;
 
     @Autowired
     public MessageService(MessageRepository messageRepository){
         this.messageRepo = messageRepository;
     }   
+
+    //#3
+    public Message postNewMessage(Message newMsg) {
+        if (!newMsg.getMessage_text().isBlank() &&
+            newMsg.getMessage_text().length() <= 255 &&
+            accountService.findByAccountId(newMsg.getPosted_by()) != null) {
+                return messageRepo.save(newMsg);
+        }
+
+        return null;
+    }
 
     //#4 Complete
     public List<Message> getAllMessages() {
