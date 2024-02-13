@@ -39,12 +39,22 @@ public class SocialMediaController {
     }
 
 
-    //#4 In progress
+    //#4 Complete
     @GetMapping("messages")
     public ResponseEntity<List<Message>> getAllMessagesHandler() {
         
         return ResponseEntity.status(200)
                         .body(messageService.getAllMessages());
     }
+
+
+    //#5 In Progress
+    @GetMapping("/messages/{message_id}")
+    public ResponseEntity<Message> getMessageById(@PathVariable int message_id) {
+        Message foundMessage = messageService.findById(message_id);
+
+        return ResponseEntity.status(200)
+                        .body(foundMessage);
+    } 
 
 }
