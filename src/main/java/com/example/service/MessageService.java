@@ -33,7 +33,7 @@ public class MessageService {
         return null;
     }
 
-    //#6
+    //#6 Complete
     public boolean deleteMessageById(int message_id) {
         Optional<Message> optionalMessage = messageRepo.findById(message_id);
         if (optionalMessage.isPresent()) {
@@ -41,5 +41,10 @@ public class MessageService {
             return true;
         }
         return false;
+    }
+
+    //#8
+    public List<Message> getMessagesByAccountId(int account_id) {
+        return messageRepo.findMessagesByPosted(account_id);
     }
 }
