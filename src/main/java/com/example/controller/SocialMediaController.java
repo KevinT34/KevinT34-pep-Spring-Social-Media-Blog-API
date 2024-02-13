@@ -74,8 +74,11 @@ public class SocialMediaController {
     //#7 IN PROGRESS
     @PatchMapping("/messages/{message_id}")
     public ResponseEntity<Integer> patchMessageById(@PathVariable int message_id, @RequestBody Message updatedMessage) {
-        messageService.updateMessage(message_id, updatedMessage);
-        return null;
+        boolean updateFlag = messageService.updateMessageById(message_id, updatedMessage);
+        if (updateFlag) {
+            return ResponseEntity.status(200).body(1);
+        } 
+        return ResponseEntity.status(400).build();
     }
 
 

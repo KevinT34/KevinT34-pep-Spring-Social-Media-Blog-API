@@ -44,7 +44,19 @@ public class MessageService {
     }
 
     //#7 IN PROGRESS
-    boolean updateMessageById
+    public boolean updateMessageById(int message_id, Message newMsg) {
+        //check if message id exists & new message text is not blank or over 255
+        if (messageRepo.findById(message_id).isPresent() &&
+                !newMsg.getMessage_text().isEmpty() &&
+                newMsg.getMessage_text().length() <= 255) {
+                    Message updatedMessage = messageRepo.findById(message_id).get();
+                    updatedMessage.setMessage_text(newMsg.getMessage_text());
+                    messageRepo.save(updatedMessage);
+                    return true;
+                }
+        
+        return false;
+    }
 
 
     //#8 IN PROGRESS
