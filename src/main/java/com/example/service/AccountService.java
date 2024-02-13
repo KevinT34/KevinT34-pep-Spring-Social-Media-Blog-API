@@ -21,7 +21,7 @@ public class AccountService {
         this.accountRepo = accountRepository;
     }
 
-    //#1 In progress
+    //#1 Complete
     public Account registerNewAccount(Account newAccount) {
         
         if(accountRepo.findByUsername(newAccount.getUsername()) != null) {
@@ -35,7 +35,7 @@ public class AccountService {
 
         }
 
-        //return client side error (maybe pass a null for client side error)
+        //return client side error (null) 
         return null;
     }
 
@@ -51,8 +51,11 @@ public class AccountService {
 
     //#3 In Progress
     public Account findByAccountId(int account_id) {
-        Account foundAccount = accountRepo.findById(account_id).get();
-        return foundAccount;
+        
+        if (accountRepo.findById(account_id).isPresent()) {
+            return accountRepo.findById(account_id).get();
+        }
+        return null;
     }
 
 

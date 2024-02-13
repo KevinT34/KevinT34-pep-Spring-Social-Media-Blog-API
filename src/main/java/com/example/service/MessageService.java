@@ -22,9 +22,10 @@ public class MessageService {
 
     //#3 IN PROGRESS
     public Message postNewMessage(Message newMsg) {
+        //accountService.findByAccountId(newMsg.getPosted_by()) != null
+        
         if (!newMsg.getMessage_text().isBlank() &&
-            newMsg.getMessage_text().length() <= 255 &&
-            accountService.findByAccountId(newMsg.getPosted_by()) != null) {
+            newMsg.getMessage_text().length() <= 255) {
                 return messageRepo.save(newMsg);
         }
 

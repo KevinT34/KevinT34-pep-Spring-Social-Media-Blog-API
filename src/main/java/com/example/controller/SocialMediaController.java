@@ -35,7 +35,7 @@ public class SocialMediaController {
     }
 
 
-    //#1 In Progress
+    //#1 Complete
     @PostMapping("register")
     public ResponseEntity<Account> postNewAccountHandler(@RequestBody Account newAcc) {
         //Call account service for business logic
