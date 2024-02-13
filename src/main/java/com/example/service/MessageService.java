@@ -24,12 +24,22 @@ public class MessageService {
         return (List<Message>) messageRepo.findAll();
     }
 
-    //#5 
+    //#5 Complete
     public Message findById(int message_id) {
         Optional<Message> optionalMessage = messageRepo.findById(message_id);
         if (optionalMessage.isPresent()) {
             return optionalMessage.get();
         }
         return null;
+    }
+
+    //#6
+    public boolean deleteMessageById(int message_id) {
+        Optional<Message> optionalMessage = messageRepo.findById(message_id);
+        if (optionalMessage.isPresent()) {
+            messageRepo.deleteById(message_id);
+            return true;
+        }
+        return false;
     }
 }

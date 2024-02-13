@@ -24,11 +24,13 @@ public class SocialMediaController {
     AccountService accountService;
     MessageService messageService;
 
+
     @Autowired
     public SocialMediaController(AccountService accService, MessageService msgService) {
         this.accountService = accService;
         this.messageService = msgService;
     }
+
 
     //#1 In Progress
     @PostMapping("register")
@@ -48,7 +50,7 @@ public class SocialMediaController {
     }
 
 
-    //#5 In Progress
+    //#5 Complete
     @GetMapping("/messages/{message_id}")
     public ResponseEntity<Message> getMessageById(@PathVariable int message_id) {
         Message foundMessage = messageService.findById(message_id);
@@ -57,4 +59,14 @@ public class SocialMediaController {
                         .body(foundMessage);
     } 
 
+
+    //#6 Complete
+    @DeleteMapping("/messages/{message_id}")
+    public ResponseEntity<Integer> deleteMessageById(@PathVariable int message_id) {
+        if (messageService.deleteMessageById(message_id)) {
+            return ResponseEntity.status(200).body(1);
+        } else {
+            return ResponseEntity.status(200).build();
+        }
+    }
 }
