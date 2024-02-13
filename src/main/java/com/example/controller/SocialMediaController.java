@@ -2,6 +2,8 @@ package com.example.controller;
 
 import java.util.List;
 
+import javax.naming.AuthenticationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,11 +45,16 @@ public class SocialMediaController {
     }
 
 
-    //#2 In Progress
+    //#2 Complete
     @PostMapping("login")
-    public ResponseEntity<Account> postLogin(@RequestBody Account loginAcc) {
-        //accountService.postLogin(loginAcc);
-        return null;
+    public ResponseEntity<Account> postLogin(@RequestBody Account loginAcc) throws AuthenticationException {
+        
+        try {
+            Account loginAccount = accountService.postLogin(loginAcc.getUsername(), loginAcc.getPassword());
+            return ResponseEntity.status(200).body(loginAccount);
+        } catch (AuthenticationException ex) {
+            return ResponseEntity.status(401).build();
+        }        
     }
 
 

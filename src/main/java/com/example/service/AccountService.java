@@ -40,11 +40,14 @@ public class AccountService {
         return null;
     }
 
-    //#2 In Progress
-    public Account postLogin(Account loginAccount) throws AuthenticationException{
+    //#2 Complete
+    public Account postLogin(String username, String password) throws AuthenticationException{
+        Account foundAccount = accountRepo.findByUsername(username);
+        if (foundAccount != null && foundAccount.getPassword().equals(password)) {
+            return foundAccount;
+        }
+        throw new AuthenticationException("Check username and passwords as they are invalid");
         
-        return null;
-        //throw new AuthenticationException("Check username and passwords as they are invalid");
     }
 
     //#3 In Progress
