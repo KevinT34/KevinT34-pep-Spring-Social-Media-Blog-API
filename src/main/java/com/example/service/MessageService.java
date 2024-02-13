@@ -43,8 +43,13 @@ public class MessageService {
         return false;
     }
 
-    //#8
+    //#7 IN PROGRESS
+    boolean updateMessageById
+
+
+    //#8 IN PROGRESS
     public List<Message> getMessagesByAccountId(int account_id) {
-        return messageRepo.findMessagesByPosted(account_id);
+        //return messageRepo.findMessagesByPostedBy(account_id);
+        return null;
     }
 }

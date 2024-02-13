@@ -70,6 +70,15 @@ public class SocialMediaController {
         }
     }
 
+
+    //#7 IN PROGRESS
+    @PatchMapping("/messages/{message_id}")
+    public ResponseEntity<Integer> patchMessageById(@PathVariable int message_id, @RequestBody Message updatedMessage) {
+        messageService.updateMessage(message_id, updatedMessage);
+        return null;
+    }
+
+
     //#8 IN PROGRESS
     @GetMapping("/accounts/{account_id}/messages")
     public ResponseEntity<List<Message>> getMessagesByAccountId(@PathVariable int account_id) {
